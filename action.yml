@@ -29,6 +29,7 @@ runs:
           ${{ steps.check.outputs.report }}
     - name: Check outputs
       if: ${{ steps.cpr.outputs.pull-request-number }}
+      shell: bash
       run: |
         echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
         echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
