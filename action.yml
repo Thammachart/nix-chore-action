@@ -1,7 +1,7 @@
 name: Nix Chore
 description: "GitHub Actions to help checking Nix Flake Repo"
 inputs:
-  nu-script:  # id of input
+  nu-script: # id of input
     description: "Nushell Script to run"
     required: true
     default: "update.nu"
@@ -17,7 +17,7 @@ runs:
       run: |
         nu ${{ inputs.nu-script }};
         let report = (git status --porcelain);
-        $"report=($report)" | save --append $env.GITHUB_OUTPUT;
+        ("report<<EOF\n" + $report + "\nEOF") | save --append $env.GITHUB_OUTPUT;
     - id: cpr
       name: Create Pull Request (if changed)
       uses: peter-evans/create-pull-request@v7
